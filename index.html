@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charSet="UTF-8" />
+        <title>SeungHeon Doh | MIR, ML/DL Researcher</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎹</text></svg>"></link>
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="robots" content="index, follow, noodp" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="google" content="notranslate" />
+        <meta name="format-detection" content="telephone=no" />
+        <title>SeungHeonDoh</title>
+    </head>
+    <style>
+        header{        
+            padding-top: 1.91rem;
+        }
+        header a{
+            color: gray !important;
+            text-decoration: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "helvetica";
+            margin-bottom: 1.01rem;
+        }
+
+        p{
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 5rem;
+            line-height: 1.15;
+            }
+
+        h2 {
+            font-size: 4rem;
+            line-height: 1.11;
+        }
+
+        h3 {
+            font-size: 2rem;
+            line-height: 1.74;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            line-height: 1.39;
+        }
+
+        h5 {
+            font-size: 1.2rem;
+            line-height: 1.56;
+            margin-bottom: 0.5em;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.56;
+            margin-bottom: 1.01rem;
+        }
+
+        .main table {
+            display: inline-table;
+        }
+        table {
+            table-layout:fixed;
+            width: 100%;
+            overflow: hidden;
+        }
+        #player{
+            width: 100%;
+        }
+        img, svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog_contents{
+            margin-bottom: 1rem;
+        }
+
+        .footer{
+            height: 50px;
+            background-color: white;
+        }
+
+        .wrapper {
+            max-width: 1920px;
+            margin: auto;
+            padding-left: 20rem;
+            padding-right: 20rem;
+            }
+        @media(max-width: 1700px){
+            .wrapper {
+                padding-left: 8rem;
+                padding-right: 8rem;
+            }
+            }
+
+        @media(max-width: 1199px){
+            .wrapper {
+            padding-left: 5rem;
+            padding-right: 5rem;
+            }
+        }
+
+        @media(max-width: 575px){
+            .wrapper {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            }
+        }
+    </style>
+
+    <body style="background-color: #f8f8f8;">
+        <header id="header" class="site-header">
+            <div class="wrapper">
+                <a 
+                    title="nav"
+                    class="btn btn-link transform-scale-h border-0 p-0"
+                    href="https://seungheondoh.github.io/#/">Home</a>
+            </div>
+        </header>
+    
+        <main id="main" class="site-main">
+            <div class="wrapper">
+                <h3>Speech to Music through Emotion</h3>
+                    <pre><code>Speech to Music through Emotion, Interspeech 2022 (submitted) - SeungHeon Doh, Minz Won, Keunwoo Choi, Juhan Nam
+                    </code></pre>
+            <p>This project maps <strong>speech</strong> and <strong>music</strong> to the same embedding space and supports music item search for speech query by calculating the similarity between them.
+            The detail of the methodology for building the dataset please refer to our paper.</p>
+            <ul>
+                <li>Paper on Arxiv</li>
+                <li>Pre-trained model on Zenodo</li>
+                <li>Implementation Code</li>
+            </ul>
+            <h4>Abstract</h4>
+                <p>Automatic speech emotion recognition (SER) can be used as a music recommendation application for content creators.
+                In this paper, our goal is to assist content creators in finding music that matches the emotion of their speech.
+                We focus on a cross-modal speech-to-music retrieval framework to simultaneously perform feature extraction and bridge the modality gap using emotion labels. Moreover, we propose a novel masking fusion method, which obtains the ensemble effect by stochastic modality feature selection.
+                Our experiments show that we can successfully bridge the gap between modalities to facilitate cross-modal retrieval.
+                In addition, comprehensive experimental results compared with four retrieval methods on five speech modality representations verify the effectiveness of our masking fusion method.
+                </p>
+            <img class="blog_contents" src="assets/img/main.png" alt="speech_to_music"/>
+            <h4>In the wild demo</h4>
+                <p>
+                To demonstrate real industrial scenarios, we use samples from social media contents (tiktok #actingscene tag) and audio books contents (youtube). 
+                It also searches for music using only the audio modality because it assumes no transcription. It also makes use of the <a href='https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/projects2/past-projects/coe/materials/emotion/soundtracks/Index'>soundtrack360 dataset</a> as a high-quality audio database.
+                </p>
+            <iframe class="blog_contents" width="800" height="600" src="https://www.youtube.com/embed/K2Aent-pRnM" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+
+            
+            <h4>Test-set demo</h4>
+                <p> We report the results for IEMOCAP and Audioset, which are test datsets reported in the paper. The samples below were extracted based on the <a href='https://github.com/SeungHeonDoh/speech_to_music/blob/master/notebook/demo.ipynb'>code</a>.</p>
+                <table>
+                    <tr>
+                        <th>  </th>
+                        <th> Speech Query </th>
+                        <th> Similar Music 1 </th>
+                        <th> Similar Music 2 </th>
+                        <th> Similar Music 3 </th>
+                    </tr>
+                    <tr> 
+                        <th> angry </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/angry/angry.wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/angry/angry (1).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/angry/angry (2).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/angry/angry (3).wav" type="audio/mpeg"></audio> </th>
+                    </tr>
+                    <tr> 
+                        <th> happy </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/happy/happy.wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/happy/happy (1).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/happy/happy (2).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/happy/happy (3).wav" type="audio/mpeg"></audio> </th>
+                    </tr>
+                    <tr> 
+                        <th> sad </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/sad/sad.wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/sad/sad (1).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/sad/sad (2).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/sad/sad (3).wav" type="audio/mpeg"></audio> </th>
+                    </tr>
+                    <tr> 
+                        <th> neutral </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/neutral/neutral.wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/neutral/neutral (1).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/neutral/neutral (2).wav" type="audio/mpeg"></audio> </th>
+                        <th> <audio controls id="player" onplay="pauseOthers(this);"><source src="assets/audios/neutral/neutral (3).wav" type="audio/mpeg"></audio> </th>
+                    </tr>
+                </table>
+
+            <h4>Visualization</h4>
+            <p>
+            First of all, for both the VA embedding space and the metric learning space, emotion labels that share a similar semantic are neighboring together in the embedding. 
+            In contrast to VA regression, metric learning discriminates between emotions and noise-neutral. 
+            Comparing uni-modal speech representation (Figure-(c),(d),(e),(f)), audio modality shows strong cohesion for each emotion label and has low error variance. 
+            Even for incorrect samples, this will lead to high errors. The text modality, on the other hand, has high error variance. It makes that angry and neutral embeddings are mixed up. The late fusion + masking approach (Figure-(g),(h)) shows a more generalized embedding distribution by alleviating the high error problem and mix-up problem between angry and neutral.
+            </p>
+            <img class="blog_contents" src="assets/img/viz.png" alt="speech_to_music"/> 
+        </main>
+        <div class="footer"></div>
+            </div>
+    </body>
+</html>
