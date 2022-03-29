@@ -135,16 +135,16 @@
             <p>This project maps <strong>speech</strong> and <strong>music</strong> to the same embedding space and supports music item search for speech query by calculating the similarity between them.
             The detail of the methodology for building the dataset please refer to our paper.</p>
             <ul>
-                <li>Paper on Arxiv</li>
-                <li>Pre-trained model on Zenodo</li>
-                <li>Implementation Code</li>
+                <li>Paper on Arxiv (will be updated)</li>
+                <li><a href="https://github.com/SeungHeonDoh/speech_to_music">Implementation Code</a></li>
+                <li>Pre-trained model on Zenodo (will be updated)</li>
             </ul>
             <h4>Abstract</h4>
-                <p>Automatic speech emotion recognition (SER) can be used as a music recommendation application for content creators.
-                In this paper, our goal is to assist content creators in finding music that matches the emotion of their speech.
-                We focus on a cross-modal speech-to-music retrieval framework to simultaneously perform feature extraction and bridge the modality gap using emotion labels. Moreover, we propose a novel masking fusion method, which obtains the ensemble effect by stochastic modality feature selection.
-                Our experiments show that we can successfully bridge the gap between modalities to facilitate cross-modal retrieval.
-                In addition, comprehensive experimental results compared with four retrieval methods on five speech modality representations verify the effectiveness of our masking fusion method.
+                <p>We introduce a framework that recommends music based on the emotions of speech. In content creation (e.g., filmmaking), the music evokes and enhances emotion. 
+                    In this paper, we focus on a cross-modal retrieval to bridge the modality gap using emotion labels. 
+                    We explore how to combine the speech modalities, those from audio and text, such that their fine-grained representations can be maintained. 
+                    We also propose an efficient masking fusion method for cross-modal retrieval tasks. 
+                    Our comprehensive experimental results show that our model successfully bridges the modality gap, and the proposed masking fusion method improves performance by stochastically selecting the disentangled feature vectors.
                 </p>
             <img class="blog_contents" src="assets/img/main.png" alt="speech_to_music"/>
             <h4>In the wild demo</h4>
@@ -197,10 +197,7 @@
 
             <h4>Visualization</h4>
             <p>
-            First of all, for both the VA embedding space and the metric learning space, emotion labels that share a similar semantic are neighboring together in the embedding. 
-            In contrast to VA regression, metric learning discriminates between emotions and noise-neutral. 
-            Comparing uni-modal speech representation (Figure-(c),(d),(e),(f)), audio modality shows strong cohesion for each emotion label and has low error variance. 
-            Even for incorrect samples, this will lead to high errors. The text modality, on the other hand, has high error variance. It makes that angry and neutral embeddings are mixed up. The late fusion + masking approach (Figure-(g),(h)) shows a more generalized embedding distribution by alleviating the high error problem and mix-up problem between angry and neutral.
+                For both the VA embedding space and the metric learning space, emotion labels that share a similar semantic are neighboring together on the embedding. In contrast to VA regression, metric learning discriminates between emotions and noise-neutral. Compared to uni-modal speech representation (Figure \ref{fig:umap}-(c),(d),(e),(f)), on one hand, the audio modality shows strong cohesion for each emotion label and has a low error variance. This will lead to a high error for low bias samples. The text modality, on the other hand, has a high error variance. As a result, the embeddings of `angry' and `neutral' would overlap heavily (Figure~\ref{fig:umap}-(e),(f)). The masking fusion approach (Figure \ref{fig:umap}-(g),(h)) shows a more generalized embedding distribution by alleviating the high error problem and overlapping problem between `angry' and `neutral'.
             </p>
             <img class="blog_contents" src="assets/img/viz.png" alt="speech_to_music"/> 
         </main>
