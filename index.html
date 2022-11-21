@@ -129,34 +129,34 @@
     
         <main id="main" class="site-main">
             <div class="wrapper">
-                <h3>Speech to Music through Emotion</h3>
-                    <pre><code>Speech to Music through Emotion, Interspeech 2022 (submitted) - SeungHeon Doh, Minz Won, Keunwoo Choi, Juhan Nam
+                <h3>Textless Speech-to-Music Retrieval Using Emotion Similarity</h3>
+                    <pre><code>Textless Speech-to-Music Retrieval Using Emotion Similarity, ICASSP 2023 (submitted) - SeungHeon Doh, Minz Won, Keunwoo Choi, Juhan Nam
                     </code></pre>
-            <p>This project maps <strong>speech</strong> and <strong>music</strong> to the same embedding space and supports music item search for speech query by calculating the similarity between them.
+
+            <p>This project maps <strong>speech</strong> and <strong>music</strong> to the joint embedding space and supports music item search for speech query by calculating the similarity between them.
             The detail of the methodology for building the dataset please refer to our paper.</p>
             <ul>
                 <li>Paper on Arxiv (will be updated)</li>
-                <li><a href="https://github.com/SeungHeonDoh/speech_to_music">Implementation Code</a></li>
-                <li>Pre-trained model on Zenodo (will be updated)</li>
+                <li><a href="https://github.com/SeungHeonDoh/speech-to-music">Implementation Code</a></li>
+                <li><a href="https://zenodo.org/record/7341484">Pre-trained model on Zenodo</a></li>
             </ul>
-            <h4>Abstract</h4>
-                <p>We introduce a framework that recommends music based on the emotions of speech. In content creation (e.g., filmmaking), the music evokes and enhances emotion. 
-                    In this paper, we focus on a cross-modal retrieval to bridge the modality gap using emotion labels. 
-                    We explore how to combine the speech modalities, those from audio and text, such that their fine-grained representations can be maintained. 
-                    We also propose an efficient masking fusion method for cross-modal retrieval tasks. 
-                    Our comprehensive experimental results show that our model successfully bridges the modality gap, and the proposed masking fusion method improves performance by stochastically selecting the disentangled feature vectors.
-                </p>
             <img class="blog_contents" src="assets/img/main.png" alt="speech_to_music"/>
+            <h4>Abstract</h4>
+                <p>We introduce a framework that recommends music based on the emotions of speech. In content creation and daily life, speech contains information about human emotions, which can be enhanced by music. In our framework, we focus on a cross-domain retrieval to bridge the gap between speech and music via emotion labels. We explore different speech representations and report their impact on different speech types including acted speech, lexically-matched speech, and wake-up word speech. We also propose an emotion similarity regularization term in cross-domain retrieval tasks. By incorporating the regularization term into training, similar speech-and-music pairs in the emotion space are closer in the joint embedding space. Our comprehensive experimental results show that the propose model is effective in textless speech-to-music retrieval. </p>
+            <img class="blog_contents" src="assets/img/emosim.png" alt="speech_to_music"/>
+            <h4>Emotion Similarity Regularization</h4>
+                <p> To preserve the continuous emotion distribution in joint embedding embedding space, we propose emotion similarity regularization (EmoSim), modified version of RankSim, for cross-domain retrieval task. 
+                    An overview of our approach is shown in figure. In practice, our goal is to encourage alignment between the similarity of neighbors in emotion space and the similarity of neighbors in feature space. 
+
+                </p>
             <h4>In the wild demo</h4>
                 <p>
-                To demonstrate real industrial scenarios, we use samples from social media contents (tiktok #actingscene tag) and audio books contents (youtube). 
+                To demonstrate real industrial scenarios, we use samples from audio books contents (youtube). 
                 It also searches for music using only the audio modality because it assumes no transcription. It also makes use of the <a href='https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/projects2/past-projects/coe/materials/emotion/soundtracks/Index'>soundtrack360 dataset</a> as a high-quality audio database.
                 </p>
-            <iframe class="blog_contents" width="800" height="600" src="https://www.youtube.com/embed/K2Aent-pRnM" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-
-            
+            <iframe class="blog_contents" width="800" height="600" src="https://www.youtube.com/embed/kr0DqnK3vso" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
             <h4>Test-set demo</h4>
-                <p> We report the results for IEMOCAP and Audioset, which are test datsets reported in the paper. The samples below were extracted based on the <a href='https://github.com/SeungHeonDoh/speech_to_music/blob/master/notebook/demo.ipynb'>code</a>.</p>
+                <p> We report the results for IEMOCAP and Audioset, which are test datsets reported in the paper.
                 <table>
                     <tr>
                         <th>  </th>
@@ -195,11 +195,30 @@
                     </tr>
                 </table>
 
-            <h4>Visualization</h4>
+            <h4>Results</h4>
+            <img class="blog_contents" src="assets/img/results.png"/> 
             <p>
-                For both the VA embedding space and the metric learning space, emotion labels that share a similar semantic are neighboring together on the embedding. In contrast to VA regression, metric learning discriminates between emotions and noise-neutral. Compared to uni-modal speech representation (Figure \ref{fig:umap}-(c),(d),(e),(f)), on one hand, the audio modality shows strong cohesion for each emotion label and has a low error variance. This will lead to a high error for low bias samples. The text modality, on the other hand, has a high error variance. As a result, the embeddings of `angry' and `neutral' would overlap heavily (Figure~\ref{fig:umap}-(e),(f)). The masking fusion approach (Figure \ref{fig:umap}-(g),(h)) shows a more generalized embedding distribution by alleviating the high error problem and overlapping problem between `angry' and `neutral'.
+                Table compares the different retrieval models with text, audio, fusion speech modality. Each cross-modal retrieval model was trained 5 times with a different random seed, and average score and standard deviation are reported together. In the case of the fusion method, we utilize inter-modality dynamics through late fusion. 
+                When comparing modalities, audio shows high performance regardless of the speech dataset. In IEMOCAP with linguistic information, text modality outperforms speech modality. A possible reason might be the availability of high emotional clues in the linguistic structure. The fusion model shows a clear performance improvement over other uni-modalities.
+                 It is expected that acoustic information and linguistic information have different information.
             </p>
-            <img class="blog_contents" src="assets/img/viz.png" alt="speech_to_music"/> 
+            <p>
+                When comparing each method, our proposed emotion similarity (EmoSim) regularization method shows high performance and low standard deviation in all three datasets and various modalities. In particular, in the audio modality of the three datasets, Triplet + EmoSim method shows high NDCG@5 performance. This is because, in the failure case, the model retrieves music items as close as possible to the correct answers.
+            </p>
+
+            <h4>Visualization</h4>
+            <img class="blog_contents" src="assets/img/viz.png" width="50%" style="float: right;"/> 
+            <p>
+                Metric learning embedding spaces are projected to a 2D space using uniform manifold approximation and projection (UMAP). We fit UMAP with music and speech embeddings, then projected them into the 2D space. 
+                Figure is the visualization of the multi-modal embedding space. Due to space constraints, we only visualize the four models. All embedding vectors are computed from the test set and the star marker stands for speech embedding and the circle marker stands for music embedding.
+                First, we confirmed that all models successfully discriminate emotion semantics. In the case of the triplet model, scary music embeddings are located at between sad and happy speech embedding cluster.  This problem is alleviated in Triplet + EmoSim model. 
+                There are relatively few scary music samples closer to angry and frustration clusters. We believe that joint embedding space learned inter-modality neighborhood structure from the continuous emotion similarity.
+
+            </p>
+            <h4>Conclusion</h4>
+            <p>
+                We presented a speech-to-music cross-domain retrieval framework that finds music that matches the emotion of speech. We explored various speech modality representations and proposed efficient masking fusion methods. To evaluate joint embedding space, we proposed a new evaluation metric that considers the rank order of a continuous distribution using the valence-arousal space of emotion. Experiments show that our model successfully bridges the modality gap. Especially, our proposed masking fusion methods make a more generalized joint embedding space. In the future, our approach can be extended to include other modalities (e.g., vision) and improved with better hierarchical fusion methods. 
+            </p>
         </main>
         <div class="footer"></div>
             </div>
