@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
-    
     <head>
         <meta charSet="UTF-8" />
         <title>SeungHeon Doh | MIR, ML/DL Researcher</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/lib/codemirror.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/addon/runmode/runmode-standalone.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/mode/python/python.min.js"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: { inlineMath: [['$$', '$$']], displayMath: [['$$$', '$$$']] }
+            });
+        </script>
+        <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎹</text></svg>"></link>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -116,7 +124,7 @@
             }
         }
     </style>
-
+    
     <body style="background-color: #f8f8f8;">
         <header id="header" class="site-header">
             <div class="wrapper">
@@ -147,8 +155,42 @@
             <h4>Emotion Similarity Regularization</h4>
                 <p> To preserve the continuous emotion distribution in joint embedding embedding space, we propose emotion similarity regularization (EmoSim), modified version of RankSim, for cross-domain retrieval task. 
                     An overview of our approach is shown in figure. In practice, our goal is to encourage alignment between the similarity of neighbors in emotion space and the similarity of neighbors in feature space. 
-
                 </p>
+                <pre><code id="python_code">
+                    import torch
+                    import torch.nn.functional as F
+
+                    # code reference: https://github.com/BorealisAI/ranksim-imbalanced-regression
+                    def batchwise_emotion_regularizer(S_z, S_y):
+                        """
+                        S_z: feature similarity between speech and music
+                        S_y: emotion similarity between speech and music
+                        """
+                        unique_batch = torch.unique(S_y, dim=1)
+                        unique_pred = []
+                        for pred, target, unique_item in zip(S_z, S_y, unique_batch):
+                            indices = torch.stack([random.choice((target==i).nonzero()[0]) for i in unique_item])
+                            unique_pred.append(pred[indices])
+                        emotion_feature = torch.stack(unique_pred)
+                        emo_loss = F.mse_loss(emotion_feature, unique_batch)
+                        return emo_loss
+                </code></pre>
+                <script type="text/javascript">
+                    window.onload = function(){
+                        var codeElement = document.getElementById('python_code');
+                        // Add code mirror class for coloring (default is the theme)
+                        codeElement.classList.add( 'cm-s-default' );
+                        var code = codeElement.innerText;
+            
+                        codeElement.innerHTML = "";
+            
+                        CodeMirror.runMode(
+                          code,
+                          'python',
+                          codeElement
+                        );
+                    };
+                </script>
             <h4>In the wild demo</h4>
                 <p>
                 To demonstrate real industrial scenarios, we use samples from audio books contents (youtube). 
